@@ -8,4 +8,4 @@ class Table:
 	def reset():
 		this.pot = 0
 		this.players = 0
-                print "hello"
+        print "hello"
