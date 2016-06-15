@@ -1,4 +1,6 @@
 from xml.dom import minidom
+from deuces import Evaluator
+from deuces import Card
 
 class Table:
 	
@@ -49,8 +51,13 @@ class Table:
 				cardsSet = 0
 				for node in cards:
 					if(node.getAttribute('card')!=""):
-						self.hand[cardsSet]=node.getAttribute('card')
+						self.hand[cardsSet]=node.getAttribute('card')[0].upper()+node.getAttribute('card')[1]
 						cardsSet += 1
 				self.setHandClass()
 			self.setPot(dom.getElementsByTagName('pot'))
-		
+
+	def getHandStrength(self):
+		evaluator = Evaluator()
+		score = evaluator.evaluate([Card.new(str(self.hand[0])),Card.new(str(self.hand[1]))], [Card.new('Td'), Card.new('4c'), Card.new('9s')])
+		rank = evaluator.get_rank_class(score)
+		print "Score:" , score , "Percentile:" , round(1-float(score)/float(7254), 2) , "Class:" , evaluator.class_to_string(rank)

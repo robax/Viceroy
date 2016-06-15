@@ -102,6 +102,8 @@ if __name__ == "__main__":
     state.parse(data)
 
     state.out()
+
+    state.getHandStrength()
     
 
     #while True:
