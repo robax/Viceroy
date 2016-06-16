@@ -4,5 +4,10 @@ DONE:
 - start modeling data
 
 TODO:
-- implement behave functionality
+- model table cards
 - begin building AI
+- implement live monitoring (again)
+
+OPTIONAL:
+- implement behave functionality
+
