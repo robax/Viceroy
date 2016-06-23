@@ -12,4 +12,15 @@ preHands = ['AAo', 'KKo', 'QQo', 'AKs', 'JJo', 'AQs', 'KQs', 'AJs', 'KJs', 'TTo'
             'Q3o', '74o', 'Q2o', 'J6o', '63o', 'J5o', '95o', '52o', 'J4o', 'J3o', '42o', 'J2o', '84o', 
             'T5o', 'T4o', '32o', 'T3o', '73o', 'T2o', '62o', '94o', '93o', '92o', '83o', '82o', '72o']
 
-
+def getPreRank(handClass):
+      count = 0
+      for e in preHands:
+            count += 1
+            if handClass==e:
+                  return count
+      handClass = handClass[1] + handClass[0] + handClass[2]
+      for e in preHands:
+            count += 1
+            if handClass==e:
+                  return count
+      return "not found:" , handClass

@@ -1,6 +1,7 @@
 from xml.dom import minidom
 from deuces import Evaluator
 from deuces import Card
+from preflop import preflop
 
 class Table:
 	
@@ -9,6 +10,7 @@ class Table:
 		self.players = 0
 		self.hand = ["",""]
 		self.handClass = ""
+		self.preflopRank = 0
 		self.dealer = 0
 
 	def reset(self):
@@ -25,6 +27,7 @@ class Table:
 		print "players:" , self.players
 		print "hand:" , self.hand[0] , self.hand[1]
 		print "hand class:" , self.handClass
+		print "preflop rank:" , self.preflopRank , "/ 169"
 
 	def getPlayers(self, players):
 		num = 0
@@ -38,6 +41,9 @@ class Table:
 		for newPot in pots:
 			if(newPot.getAttribute('total_pot') != ""):
 				self.pot = newPot.getAttribute('total_pot')
+
+	def setPreflopRank(self):
+		self.preflopRank = preflop.getPreRank(self.handClass)
 
 	def parse(self, data):
 		# parse the packet data
@@ -55,6 +61,8 @@ class Table:
 						cardsSet += 1
 				self.setHandClass()
 			self.setPot(dom.getElementsByTagName('pot'))
+			self.setPreflopRank()
+
 
 	def getHandStrength(self):
 		evaluator = Evaluator()
